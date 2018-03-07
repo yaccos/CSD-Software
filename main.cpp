@@ -11,7 +11,7 @@
 using namespace std;
 
 
-struct timeval start, end;
+struct timeval start, endi;
 
 
 int main(int argc, char* argv[])
@@ -92,8 +92,8 @@ int main(int argc, char* argv[])
 
 
   // Determining wall-time
-  gettimeofday(&end, NULL);
-  double delta = ((end.tv_sec - start.tv_sec)* 1000000u + end.tv_usec - start.tv_usec)/1.e6;
+  gettimeofday(&endi, NULL);
+  double delta = ((endi.tv_sec - start.tv_sec)* 1000000u + endi.tv_usec - start.tv_usec)/1.e6;
 
   cout << "\n\nWall-time:\t" << delta << "\tseconds\n";
   

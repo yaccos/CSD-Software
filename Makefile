@@ -1,10 +1,20 @@
 # -*-Makefile-*-
 
 OBJS = main.o runProgram.o preprocessing.o queryValidation.o fileIO.o subsampling2.o correlation.o csdFiltering.o utils.o readFileTestUtils.o
-CC = g++ -O3 -fopenmp
-DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
-LFLAGS = -Wall $(DUBUG)
+
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+	CC =/usr/local/opt/llvm/bin/clang++ -O3 -fopenmp -v
+	DEBUG = -g
+	CFLAGS = -Wall -c $(DEBUG)
+	LFLAGS = -Wall $(DUBUG) -L /usr/local/opt/llvm/lib
+else
+	CC = g++ -O3 -fopenmp
+	DEBUG = -g
+	CFLAGS = -Wall -c $(DEBUG)
+	LFLAGS = -Wall $(DUBUG)
+endif
+
 
 DiCoN: $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o CSD-CS
